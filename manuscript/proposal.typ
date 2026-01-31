@@ -1,4 +1,32 @@
-= Evaluating Neural Efficiency of Sensing Modalities
+#import "@preview/fine-lncs:0.4.0": lncs, institute, author, theorem, proof
+
+#let inst_ucsb = institute("University of California, Santa Barbara", 
+  addr: "Santa Barbara, CA, USA"
+)
+
+#show: lncs.with(
+  title: "Evaluating Neural Efficiency of Sensing Modalities",
+  authors: (
+    author("Anantajit Subrahmanya", 
+      insts: (inst_ucsb),
+    ),
+    author("Aaditya Prakash Kattekola", 
+      insts: (inst_ucsb),
+    ),
+  ),
+  abstract: [
+    We investigate optimal neuronal allocation across sensory modalities (vision,
+    audition, olfaction) for a hunting task using reinforcement learning. Inspired
+    by biological differences in cortical organization across species, we ask:
+    given identical sensors, how should neural resources be distributed? We
+    simulate 2D multi-modal sensing with fixed parameter count but
+    propose a learnable per-modality partitioning. By normalizing
+    information rates across modalities and evaluating task performance, we aim to
+    determine the task-specific coding efficiency of each sense and explore robustness under
+    noise conditions.
+  ],
+  bibliography: bibliography("artemis.bib")
+)
 
 == Background
 
@@ -20,10 +48,24 @@ visual and auditory cortices be the same (as percentages of the brain)?
 
 == Research Question
 
-Given a set of sensors, what is the best neuronal allocation for sensing
-modality representation for a particular task? How can we unify the
-representation of the senses across modalities with comparable parameters and
-costs? How do these results change in the presence of noise?
+1. *Given a set of sensors, what is the best neuronal allocation for sensing
+   modality representation for a particular task?* We define neuronal allocation
+   (informally) as the number of neurons recruited for a particular task. One
+  interpretation would be, if we fix the neurons for each modality, which one
+  performs the best? Another interpretation (which we explore here) involves
+  allowing free allocation of neurons, and counting how many are assigned to each
+  modality. This would be similar to comparing the size of the cortexes in a
+  biological brain. 
+
+2. *How can we unify the representation of the senses across modalities with
+   comparable parameters and costs?* This is a necessary step for (1) --
+   treating all modalities "equally". 
+
+3. *How do these results change in the presence of noise?* Using (2), we can
+   define a measure of noise (signal to noise ratio, perhaps) and see how the
+   neuron allocation is affected as well as the change in performance. We may
+   also explore imbalanced noise to simulate environmental effects (for example,
+   high noise in vision to simulate a dark room). 
 
 == Proposed Approach
 
@@ -61,5 +103,3 @@ Pursuit Strategies from the Scents of the Prey" led by Fatih Dinc. The primary
 difference is we wish to focus less on the emergent properties of the model
 architecture (RNNs) and instead focus on efficiency of the modalities
 themselves. We also focus more on multi-modality than scent alone. 
-
-#bibliography("artemis.bib")
